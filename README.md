@@ -30,7 +30,7 @@ public protocol 👍ViewModelProtocol {
 
 public final class 👍ViewModel<T>: 👍ViewModelProtocol {
     // 👍 `Property` is a better type than `Observable`.
-    @Readwrite public let state: Property<T>
+    @ReadWrite public let state: Property<T>
     
     public init(initialValue: T) {
         state = Property(initialValue)

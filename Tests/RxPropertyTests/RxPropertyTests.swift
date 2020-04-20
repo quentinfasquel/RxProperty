@@ -10,7 +10,7 @@ final class RxPropertyTests: XCTestCase {
     func test_initWithBehaviorRelay_value() {
 
         let relay = BehaviorRelay<Int>(value: 0)
-        let property = Property<Int>(relay)
+        let property = RxProperty<Int>(relay)
 
         XCTAssertEqual(property.value, 0)
 
@@ -25,7 +25,7 @@ final class RxPropertyTests: XCTestCase {
     func test_initWithBehaviorRelay_asObservable() {
 
         let relay = BehaviorRelay<Int>(value: 0)
-        var property: Property<Int>! = .init(relay)
+        var property: RxProperty<Int>! = .init(relay)
 
         var events = [Event<Int>]()
 
@@ -56,7 +56,7 @@ final class RxPropertyTests: XCTestCase {
     func test_initWithBehaviorRelay_changed() {
 
         let relay = BehaviorRelay<Int>(value: 0)
-        var property: Property<Int>! = .init(relay)
+        var property: RxProperty<Int>! = .init(relay)
 
         var events = [Event<Int>]()
 
@@ -89,7 +89,7 @@ final class RxPropertyTests: XCTestCase {
     func test_initWithUnsafe_value() {
 
         let relay = BehaviorRelay<Int>(value: 0)
-        let property = Property<Int>(unsafeObservable: relay.asObservable())
+        let property = RxProperty<Int>(unsafeObservable: relay.asObservable())
 
         XCTAssertEqual(property.value, 0)
 
@@ -104,7 +104,7 @@ final class RxPropertyTests: XCTestCase {
     func test_initWithUnsafe_asObservable() {
 
         let relay = BehaviorRelay<Int>(value: 0)
-        var property: Property<Int>! = .init(unsafeObservable: relay.asObservable())
+        var property: RxProperty<Int>! = .init(unsafeObservable: relay.asObservable())
 
         var events = [Event<Int>]()
 
@@ -135,7 +135,7 @@ final class RxPropertyTests: XCTestCase {
     func test_initWithUnsafe_changed() {
 
         let relay = BehaviorRelay<Int>(value: 0)
-        var property: Property<Int>! = .init(unsafeObservable: relay.asObservable())
+        var property: RxProperty<Int>! = .init(unsafeObservable: relay.asObservable())
 
         var events = [Event<Int>]()
 

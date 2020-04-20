@@ -1,5 +1,5 @@
 //
-//  Property.swift
+//  RxProperty.swift
 //  RxProperty
 //
 //  Created by Yasuhiro Inami on 2017-03-11.
@@ -9,7 +9,7 @@
 import RxSwift
 import RxCocoa
 
-/// A get-only `BehaviorRelay` that works similar to ReactiveSwift's `Property`.
+/// A get-only `BehaviorRelay` that works similar to ReactiveSwift's `RxProperty`.
 ///
 /// - Note:
 /// From ver 0.3.0, this class will no longer send `.completed` when deallocated.
@@ -17,7 +17,7 @@ import RxCocoa
 /// - SeeAlso:
 ///     https://github.com/ReactiveCocoa/ReactiveSwift/blob/1.1.0/Sources/Property.swift
 ///     https://github.com/ReactiveX/RxSwift/pull/1118 (unmerged)
-public final class Property<Element> {
+public final class RxProperty<Element> {
 
     public typealias E = Element
 
@@ -60,7 +60,7 @@ public final class Property<Element> {
     ///
     /// - Warning:
     /// If `unsafeObservable` sends multiple values synchronously,
-    /// the last value will be treated as initial value of `Property`.
+    /// the last value will be treated as initial value of `RxProperty`.
     public convenience init(unsafeObservable: Observable<E>) {
         let observable = unsafeObservable.share(replay: 1, scope: .whileConnected)
         var initial: E? = nil
@@ -104,11 +104,11 @@ public final class Property<Element> {
 /// additional BehaviourRelay for internal usage.
 ///
 @propertyWrapper
-final class Readwrite<Element> {
+final class ReadWrite<Element> {
 
-    var wrappedValue: Property<Element>
+    var wrappedValue: RxProperty<Element>
 
-    init(wrappedValue: Property<Element>) {
+    init(wrappedValue: RxProperty<Element>) {
         self.wrappedValue = wrappedValue
     }
 
