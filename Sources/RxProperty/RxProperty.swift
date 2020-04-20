@@ -21,7 +21,7 @@ public final class Property<Element> {
 
     public typealias E = Element
 
-    private let _behaviorRelay: BehaviorRelay<E>
+    fileprivate let _behaviorRelay: BehaviorRelay<E>
 
     /// Gets current value.
     public var value: E {
@@ -98,4 +98,25 @@ public final class Property<Element> {
         return asObservable().skip(1)
     }
 
+}
+
+/// This property wrapper allows to modify readonly property without decalring
+/// additional BehaviourRelay for internal usage.
+///
+@propertyWrapper
+final class Readwrite<Element> {
+
+    var wrappedValue: Property<Element>
+
+    init(wrappedValue: Property<Element>) {
+        self.wrappedValue = wrappedValue
+    }
+
+    func accept(_ event: Element) {
+        wrappedValue._behaviorRelay.accept(event)
+    }
+
+    var relay: BehaviorRelay<Element> {
+        return wrappedValue._behaviorRelay
+    }
 }

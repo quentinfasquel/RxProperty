@@ -22,15 +22,24 @@ public final class 💩ViewModel<T> {
 ```
 
 ```swift
-public final class 👍ViewModel<T> {
-    // 👍 Hide variable.
-    private let _state = BehaviorRelay<T>(...)
-
-    // 👍 `Property` is a better type than `Observable`.
-    public let state: Property<T>
+public protocol 👍ViewModelProtocol {
+    associatedtype T
     
-    public init() {
-        self.state = Property(_state)
+    public let state: Property<T>
+}
+
+public final class 👍ViewModel<T>: 👍ViewModelProtocol {
+    // 👍 `Property` is a better type than `Observable`.
+    @Readwrite public let state: Property<T>
+    
+    public init(initialValue: T) {
+        state = Property(initialValue)
+        
+        //...
+    }
+    
+    private func setState(to newValue: T) {
+        _state.accept(newValue)
     }
 }
 ```
