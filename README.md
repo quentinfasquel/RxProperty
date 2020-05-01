@@ -25,7 +25,7 @@ public final class 💩ViewModel<T> {
 public protocol 👍ViewModelProtocol {
     associatedtype T
     
-    public let state: Property<T>
+    var state: Property<T> { get }
 }
 
 public final class 👍ViewModel<T>: 👍ViewModelProtocol {
