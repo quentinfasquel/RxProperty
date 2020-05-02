@@ -25,15 +25,14 @@ public final class 💩ViewModel<T> {
 public protocol 👍ViewModelProtocol {
     associatedtype T
     
-    var state: Property<T> { get }
+    var state: RxProperty<T> { get }
 }
 
 public final class 👍ViewModel<T>: 👍ViewModelProtocol {
-    // 👍 `Property` is a better type than `Observable`.
-    @ReadWrite public let state: Property<T>
+    @ReadWrite public let state: RxProperty<T>
     
     public init(initialValue: T) {
-        state = Property(initialValue)
+        state = RxProperty(initialValue)
         
         //...
     }
