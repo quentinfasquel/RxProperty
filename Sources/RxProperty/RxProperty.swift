@@ -111,12 +111,8 @@ final class ReadWrite<Element> {
     init(wrappedValue: RxProperty<Element>) {
         self.wrappedValue = wrappedValue
     }
-
-    func accept(_ event: Element) {
-        wrappedValue._behaviorRelay.accept(event)
-    }
-
-    var relay: BehaviorRelay<Element> {
+    
+    var projectedValue: BehaviorRelay<Element> {
         return wrappedValue._behaviorRelay
     }
 }

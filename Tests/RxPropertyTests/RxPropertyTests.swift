@@ -8,7 +8,6 @@ final class RxPropertyTests: XCTestCase {
     // MARK: - initWithBehaviorRelay
 
     func test_initWithBehaviorRelay_value() {
-
         let relay = BehaviorRelay<Int>(value: 0)
         let property = RxProperty<Int>(relay)
 
@@ -160,6 +159,28 @@ final class RxPropertyTests: XCTestCase {
         XCTAssertEqual(events, [.next(1), .next(2), .next(3)],
                        "`property`'s observable should still be alive even when `property` is deallocated.")
 
+    }
+    
+    
+    // MARK: - ReadWrite
+    
+    @ReadWrite var testProperty = RxProperty<Int>(0)
+    func test_read_write_property_wrapper() {
+        var events = [Event<Int>]()
+        
+        // `.changed` test
+        _ = testProperty.changed.subscribe { event in
+            events.append(event)
+        }
+
+        XCTAssertEqual(events, [Event<Int>](),
+                       "should NOT observe initial value")
+
+        $testProperty.accept(1)
+        XCTAssertEqual(events, [.next(1)])
+
+        $testProperty.accept(2)
+        XCTAssertEqual(events, [.next(1), .next(2)])
     }
 
 }
