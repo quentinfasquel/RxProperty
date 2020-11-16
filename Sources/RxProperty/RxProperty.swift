@@ -104,15 +104,15 @@ public final class RxProperty<Element> {
 /// additional BehaviourRelay for internal usage.
 ///
 @propertyWrapper
-final class ReadWrite<Element> {
+public final class ReadWrite<Element> {
 
-    var wrappedValue: RxProperty<Element>
+    public var wrappedValue: RxProperty<Element>
 
-    init(wrappedValue: RxProperty<Element>) {
+    public init(wrappedValue: RxProperty<Element>) {
         self.wrappedValue = wrappedValue
     }
     
-    var projectedValue: BehaviorRelay<Element> {
+    public var projectedValue: BehaviorRelay<Element> {
         return wrappedValue._behaviorRelay
     }
 }
